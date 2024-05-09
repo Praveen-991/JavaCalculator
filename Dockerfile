@@ -1,3 +1,11 @@
-FROM tomcat:latest
-RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
-COPY /home/ec2-user/JavaCalculator/target/*.jar /usr/local/tomcat/webapps
+# Use a base image with Java pre-installed
+FROM openjdk:11
+
+# Copy the JAR file into the container at /app
+COPY target/RaviCalculator-1.3.jar /app/RaviCalculator-1.3.jar
+
+# Expose the port your application runs on
+EXPOSE 8080
+
+# Command to run your application
+CMD ["java", "-jar", "RaviCalculator-1.3.jar"]
